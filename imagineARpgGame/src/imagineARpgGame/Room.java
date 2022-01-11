@@ -17,6 +17,9 @@ public class Room {
 	// every room now will have a list of npcs
 	private List<NPC> npcs = new ArrayList<NPC>();
 	
+	// have an list with all the items in the room
+	private ArrayList<Item> items = new ArrayList<Item>();
+	
 	public Room(int x) {
 		// init room instance with its number
 		number = x;
@@ -60,6 +63,10 @@ public class Room {
 	
 	public List<NPC> getNpcs() {
 		return this.npcs;
+	}
+	
+	public ArrayList<Item> getItems() {
+		return this.items;
 	}
 
 }

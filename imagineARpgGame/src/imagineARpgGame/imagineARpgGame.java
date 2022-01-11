@@ -10,6 +10,10 @@ public class imagineARpgGame {
 		// TODO Auto-generated method stub
 		// populate our NPC array and set up NPC database
 		Game_Objects.initNPCArray();
+		
+		// populate our Item array and set up Item database
+		Game_Objects.initItemArray();
+		
 		while(true) {
 			game_loop();
 		}

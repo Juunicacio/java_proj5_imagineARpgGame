@@ -1,13 +1,20 @@
 package imagineARpgGame;
 
-public class Troll extends NPC{
+public class Troll extends NPC{	
 	public Troll() {
-		id = "Troll";
-		hp = 10;
-		accuracy = 25;
-		desc = "A Troll stands here";
-		name = "A Troll";
+		this.name = "A Troll";
+		this.id = "Troll";
+		this.desc = "A Troll stands here";
+		this.hp = 50;
+		this.accuracy = 20;		
 	}
 	
+	public String getId() {
+		return this.id;
+	}
+	
+	public String getName() {
+		return this.name;
+	}
 	
 }

@@ -11,6 +11,17 @@ public class NPC {
 	public String getId() {
 		return this.id;
 	}
+	
+	public String getName() {
+		return this.name;
+	}	
+	
+	public void look() {
+		System.out.println(this.name);
+		System.out.println("hp:" + this.hp);
+		System.out.println("accuracy:" + this.accuracy);
+		// it will also shows the player the player's items
+	}
 
 }
 

@@ -13,7 +13,11 @@ public class Game_Objects {
 	static ArrayList<Room> room = new ArrayList<Room>();
 	
 	// creating a static array list to put the npcs database
-	static List<Object>NPCDataBase = new ArrayList<Object>();
+	static List<Object> NPCDataBase = new ArrayList<Object>();
+	
+	// list to put items in the database
+	static List<Object> ItemDataBase = new ArrayList<Object>();
+	
 	
 	
 	// everytime you create a creature, you need to add it in this init array
@@ -21,6 +25,15 @@ public class Game_Objects {
 	public static void initNPCArray() {
 		NPCDataBase.add(new NPC());
 		NPCDataBase.add(new Troll());		
+		NPCDataBase.add(new Dragon());	
+	}
+	
+	// init item array
+	public static void initItemArray() {
+		ItemDataBase.add(new Item());
+		ItemDataBase.add(new Sword());
+		ItemDataBase.add(new Axe());
+		ItemDataBase.add(new Ring());
 	}
 	
 

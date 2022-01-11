@@ -1,5 +1,7 @@
 package imagineARpgGame;
 
+import java.util.ArrayList;
+
 public class PlayerCharacter {
 	// you can add what you want in here
 	private String name;
@@ -7,6 +9,9 @@ public class PlayerCharacter {
 	private int accuracy;
 	// if room == 0, this player don't exist in the game
 	private int inRoom = 0;
+	
+	// list of player items
+	private ArrayList<Item> items = new ArrayList<Item>();
 	
 	public void setName(String name) {
 		this.name = name;		
@@ -31,6 +36,10 @@ public class PlayerCharacter {
 	// get the number of the room of the player
 	public int getRoom() {
 		return inRoom;		
+	}
+	
+	public ArrayList<Item> getItems() {
+		return this.items;
 	}
 	
 	public void look() {
