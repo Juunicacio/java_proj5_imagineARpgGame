@@ -25,6 +25,8 @@ public class imagineARpgGame {
 		// as it is inside our game_loop it will constantly wait for command
 		gl.waitForCommand();
 		
+		
+		
 	}
 
 }

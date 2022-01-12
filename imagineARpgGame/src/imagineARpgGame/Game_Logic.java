@@ -1,26 +1,164 @@
 package imagineARpgGame;
 
-//import java.lang.reflect.Constructor;
+import java.io.BufferedReader;
+import java.io.FileReader;
+import java.io.IOException;
+
 import java.lang.reflect.InvocationTargetException;
+import java.nio.file.Files;
+import java.nio.file.Path;
+import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.List;
 import java.util.Scanner;
 
 
 public class Game_Logic {
 	public Game_Logic() {
 		// adding a room with its name
-		Game_Objects.room.add(new Room(1));
+		Game_Objects.room.add(new Room(0));
 		// later on, we will have a text file that contains the desc and exits of the created room
 		// adding it manually:
 		// get the room in position 0 (the room number 1)
-		Game_Objects.room.get(0).setName("First Room");
+		/*Game_Objects.room.get(0).setName("First Room");
 		Game_Objects.room.get(0).addDescription("Desc Line 1");
 		Game_Objects.room.get(0).addDescription("Desc Line 2");
 		Game_Objects.room.get(0).addDescription("Desc Line 3");
 		Game_Objects.room.get(0).addDescription("Desc Line 4");
 		Game_Objects.room.get(0).addLinkingExits("South links to room 2");
-		Game_Objects.room.get(0).addLinkingExits("North links to room 3");
+		Game_Objects.room.get(0).addLinkingExits("North links to room 3");*/
 		
+		// array list with the rooms info
+		List<String> roomInfo = new ArrayList<>();		
+		try {
+			// we will have the entire Textfile inside of our roomInfo	
+			roomInfo = readLines("MyTextFiles/RoomDescriptions.txt");			
+		}catch(IOException e) {
+			e.printStackTrace();
+		}
 		
+		// parsing the roomInfo by semicolons and spaces
+		// loop through roomInfo
+		for(int i = 0; i < roomInfo.size(); i++) {
+			// it will give me all the lines
+			String[] firstWord = roomInfo.get(i).split(" ");
+			String[] everythingElse = roomInfo.get(i).split(":");
+			
+			if(firstWord[0].equals("Name:")) {
+				int currentRoomSize = Game_Objects.room.size();
+				
+				Game_Objects.room.add(new Room(currentRoomSize));
+				// because if we have 1 room, it will have the index 0, for example
+				// set the name and number of it
+				Game_Objects.room.get(Game_Objects.room.size() - 1).setName(everythingElse[1]);
+				Game_Objects.room.get(Game_Objects.room.size() - 1).setNumber(currentRoomSize);				
+				
+				System.out.println("-----------");
+				System.out.println(Game_Objects.room.get(Game_Objects.room.size() - 1).getName());				
+				
+				// it will needs to know everytime that it see the word "Name:"
+				int roomCount = 0;
+				for(int y = 0; y< roomInfo.size(); y++) {
+					String[] nextFirstWord = roomInfo.get(y).split(" ");
+					
+					if(nextFirstWord[0].equals("Name:")) {
+						roomCount++;
+					}
+					
+					if(roomCount == currentRoomSize) {
+						if(nextFirstWord[0].equals("Desc:")) {
+							String[] nextEverythingElse = roomInfo.get(y).split(":");
+							
+							// add all the descriptions in the descriptions array
+							Game_Objects.room.get(Game_Objects.room.size() - 1).getDesc().addAll(Arrays.asList(nextEverythingElse));							
+						}
+					}
+				}
+					
+					// adding the Exits saved in the text file
+					/*if(roomCount == currentRoomSize) {
+						if(nextFirstWord[0].equals("Exit:")) {
+							String[] nextEverythingElse = roomInfo.get(z).split(":");*/
+							
+							// Converting [Exit:, South, links, to, room, 1] into 
+							// Exit: South links to room 1							
+							/*StringBuilder sb = new StringBuilder();
+							for(String str: nextEverythingElse) {
+								sb.append(str);
+								// add space between elements
+								sb.append(" ");
+							}
+							String exitString = sb.toString();*/
+							
+							//System.out.println("My string is: " + exitString);
+							
+							//String separator = ", ";
+							//String toPrint =
+							
+							// add all the desc of that exit
+							//Game_Objects.room.get(Game_Objects.room.size() - 1).getExits().addAll(Arrays.asList(nextEverythingElse);
+							//Game_Objects.room.get(Game_Objects.room.size() - 1).getExits().addAll(Arrays.asList(exitString));
+							//Game_Objects.room.get(Game_Objects.room.size() - 1).addLinkingExits(exitString);
+						//}
+					//}
+					
+				// put the exits infos here to see if works, after checking the nextFirstWord
+				roomCount = 0;
+				for(int z =0; z< roomInfo.size(); z++) {
+					String[] nextFirstWord = roomInfo.get(z).split(" ");
+					if(nextFirstWord[0].equals("Name:")) {
+						roomCount++;
+					}
+					if (roomCount == currentRoomSize) {
+						if(nextFirstWord[0].equals("Exit:")) {
+							String[] nextEverythingElse = roomInfo.get(z).split(":");
+							
+							System.out.println("My list is: " + Arrays.asList(nextEverythingElse));
+							
+							String test;
+							if(nextEverythingElse.length > 1) {
+								test = nextEverythingElse[1];
+							}
+							else {
+								test = nextEverythingElse[0];
+							}
+							
+							// I will try it tomorrow!
+							// tks everyone that has been here!!
+							
+							
+							System.out.println("My string is: " + test);
+							
+							//Game_Objects.room.get(Game_Objects.room.size() - 1).addLinkingExits(test);
+							
+							Game_Objects.room.get(Game_Objects.room.size() - 1).getExits().add(test);
+							//Game_Objects.room.get(Game_Objects.room.size() - 1).getExits().addAll(Arrays.asList(nextEverythingElse));
+						}
+					}
+				}				
+			}
+		}		
+	}
+	
+	// this bit you can put off from internet:
+	// it takes the file and reads it into an array of lines
+	// returning all the lines in the file
+	public List<String> readLines(String filename) throws IOException{
+		FileReader fileReader = new FileReader(filename);
+		BufferedReader bufferedReader = new BufferedReader(fileReader);
+		
+		List<String> lines = new ArrayList<String>();
+		String line = null;
+		//String line = bufferedReader.readLine();
+		
+		//System.out.println(bufferedReader.readLine());
+		
+		while((line = bufferedReader.readLine()) != null) {
+		//while(line != null) {
+			lines.add(line);
+		}
+		bufferedReader.close();
+		return lines;
 	}
 	
 	// print out the question and wait
@@ -59,6 +197,26 @@ public class Game_Logic {
 		
 		if(x[0].equals("get")) {
 			get(x);
+		}
+		
+		if(x[0].equals("wear")) {
+			Game_Objects.player.wear(x);
+		}
+		
+		if(x[0].equals("equipments")) {
+			Game_Objects.player.equipments();
+		}
+		
+		if(x[0].equals("remove")) {
+			Game_Objects.player.remove(x);
+		}
+		
+		if(x[0].equals("attack")) {
+			Game_Objects.combat.attack(x);
+		}
+		
+		if(x[0].equals("move")) {
+			move(x);
 		}
 		
 	}
@@ -117,7 +275,7 @@ public class Game_Logic {
 				}
 			}
 			
-			// look throught the rooms
+			// look through the rooms
 			// see what room the player is standing in
 			for(int y=0;y<Game_Objects.room.size();y++) {
 				if(Game_Objects.room.get(y).getNumber() == Game_Objects.player.getRoom()) {
@@ -260,7 +418,56 @@ public class Game_Logic {
 		}
 	}
 	
-	
+	// move the player between rooms
+	public void move(String [] x) {
+		// if the user just typed move
+		if(x.length == 1) {
+			System.out.println("Move where?");
+		}
+		
+		// if the user typed 'move south' for example
+		if(x.length == 2) {
+			// looping through all the rooms in the game
+			for(int i=0; i<Game_Objects.room.size(); i++) {
+				// if the room is the same as the player is in
+				if(Game_Objects.room.get(i).getNumber() == Game_Objects.player.getRoom()) {
+					
+					// loop through all the exits present in that room
+					for(int y =0; y<Game_Objects.room.get(i).getArrayExitsSize(); y++) {
+						
+						// it will print: South links to room 2
+						//System.out.println(Game_Objects.room.get(i).getExits().get(y));
+						// now I need to get the first word 'South' and save it in a variable
+						
+						String exitWholeString = Game_Objects.room.get(i).getExits().get(y);
+						String[] exitArray = exitWholeString.split(" ");
+						
+						// exitArray[0] == South
+												
+						// if the exit the user typed exists in that room
+						if(x[1].equalsIgnoreCase(exitArray[0])) {
+							//System.out.println("You leave " + Game_Objects.player.getRoom());
+							// print player's room
+							System.out.println("You just leave the room number: "+Game_Objects.player.getRoom());
+							
+							// I need to move the player for the room 2 when he calls for south
+							// exitArray[-1] == 2 (number of the room present in the South exit)	
+							// South links to room 2 - I need the number 2
+							String lastWordOfExit =  exitArray[exitArray.length - 1];							
+							int exitInInt = Integer.parseInt(lastWordOfExit);
+							
+							// set new player's room number
+							Game_Objects.player.setRoom(exitInInt);
+							
+							System.out.println("Now you are at the room number: "+Game_Objects.player.getRoom());
+							
+						}
+					}
+				}
+			}
+		}
+		
+	}
 	
 	public void createCharacter() {
 		System.out.println("Welcome to the Game. What is your name?");

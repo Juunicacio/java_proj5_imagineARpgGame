@@ -1,0 +1,37 @@
+Name: First Room
+Number: 1
+Desc: Desc Line 1
+Desc: Desc Line 2
+Desc: Desc Line 3
+Desc: Desc Line 4
+Exit: South links to room 2
+Exit: North links to room 3 
+Name: South Room
+Number: 2
+Desc: Desc Line 1
+Desc: Desc Line 2
+Desc: Desc Line 3
+Desc: Desc Line 4
+Exit: West links to room 4
+Name: West Room
+Number: 4
+Desc: Desc Line 1
+Desc: Desc Line 2
+Desc: Desc Line 3
+Desc: Desc Line 4
+Name: North Room
+Number: 3
+Desc: Desc Line 1
+Desc: Desc Line 2
+Desc: Desc Line 3
+Desc: Desc Line 4
+Exit: South links to room 1
+Exit:
+Name: 
+Number:
+Desc:
+Desc:
+Desc:
+Desc:
+Exit:
+Exit:

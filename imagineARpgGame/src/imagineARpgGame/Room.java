@@ -27,7 +27,11 @@ public class Room {
 	
 	public void setName(String roomName) {
 		this.name = roomName;
-	}	
+	}
+	
+	public void setNumber(int roomNumber) {
+		this.number = roomNumber;
+	}
 	
 	public void addDescription(String description) {
 		desc.add(description);
@@ -35,10 +39,15 @@ public class Room {
 	
 	public void addLinkingExits(String exit) {
 		exits.add(exit);
+		// the first word of that exit is the name of the exit
 	}
 	
 	public String getName() {
 		return this.name;
+	}
+	
+	public List<String> getExits(){
+		return exits;
 	}
 	
 	public int getArrayDescSize() {

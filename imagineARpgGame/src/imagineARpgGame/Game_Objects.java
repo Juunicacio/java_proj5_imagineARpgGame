@@ -6,6 +6,7 @@ import java.util.List;
 // it will contains all the npcs and items, for example, in the game
 
 public class Game_Objects {
+	
 	static PlayerCharacter player = new PlayerCharacter();
 	// first we are gonna add an arraylist
 	// it is gonna contain just Room type objects
@@ -18,6 +19,10 @@ public class Game_Objects {
 	// list to put items in the database
 	static List<Object> ItemDataBase = new ArrayList<Object>();
 	
+	// create a reference to the random
+	static ReturnRandom rr = new ReturnRandom();
+	
+	static Combat combat = new Combat();	
 	
 	
 	// everytime you create a creature, you need to add it in this init array
