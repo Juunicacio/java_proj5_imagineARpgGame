@@ -24,6 +24,8 @@ public class Game_Objects {
 	
 	static Combat combat = new Combat();	
 	
+	static List<Object> allNPCs = new ArrayList<Object>();
+	
 	
 	// everytime you create a creature, you need to add it in this init array
 	// the NPCDataBase will contain all the creature in the game

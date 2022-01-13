@@ -14,6 +14,10 @@ public class imagineARpgGame {
 		// populate our Item array and set up Item database
 		Game_Objects.initItemArray();
 		
+		// Starting monsterThread
+		MonsterThread mt = new MonsterThread(gl);
+		mt.startMonsterThread();
+		
 		while(true) {
 			game_loop();
 		}

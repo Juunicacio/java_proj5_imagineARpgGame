@@ -86,8 +86,7 @@ public class PlayerCharacter {
 	
 	public void wear(String[] x) {
 		if(carriedItems.size() == 0) {
-			// loop through all the items in my inventory
-			
+			// loop through all the items in my inventory			
 			for(int i=0; i<items.size();i++) {
 				// check to see the word the user typed, like 'wear ring'
 				// if that matches with the existed items and also if it is wearable
@@ -101,15 +100,23 @@ public class PlayerCharacter {
 				}				
 			}
 		}			
-		else {
-			// if the carriedItems has stuff in it, set the isWearing to false
-			boolean isWearing = false;
+		else {			
 			// loop through all the carriedItems, to see what the player is wearing
 			// because we don't wanna put two things in the same spot
-			for(int i=0; i<carriedItems.size();i++) {
+			for(int i=0; i < carriedItems.size(); i++) {
+				boolean isWearing = false;
 				// loop through all the items in the inventory, to see if what the user typed matches
 				for(int z=0; z < items.size(); z++) {
+					// if the carriedItems has stuff in it, set the isWearing to false
 					if(x[1].equalsIgnoreCase(items.get(z).getId()) && items.get(z).isWearable) {
+						
+						// wearing a sword
+						// having axe
+						// wants to wear ring
+						//System.out.println(carriedItems.size()); // 1 I'm wearing a sword
+						//System.out.println(items.size()); // I've 2 items in my bag
+						
+						
 						// check if the item has a wear location that is equal to the carried items wear location
 						// cheching every carried items agains the item you wanna wear
 						if(items.get(z).wearloc.equals(carriedItems.get(i).wearloc)) {
@@ -125,7 +132,7 @@ public class PlayerCharacter {
 							break;
 						}
 					}
-				}								
+				}
 			}
 		}
 	}
