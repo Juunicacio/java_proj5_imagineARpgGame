@@ -16,17 +16,20 @@ import java.util.Scanner;
 public class Game_Logic {
 	public Game_Logic() {
 		// adding a room with its name
+		
+		// I need to add a empty room first to the roomCount later on 
 		Game_Objects.room.add(new Room(0));
-		// later on, we will have a text file that contains the desc and exits of the created room
-		// adding it manually:
-		// get the room in position 0 (the room number 1)
-		/*Game_Objects.room.get(0).setName("First Room");
-		Game_Objects.room.get(0).addDescription("Desc Line 1");
-		Game_Objects.room.get(0).addDescription("Desc Line 2");
-		Game_Objects.room.get(0).addDescription("Desc Line 3");
-		Game_Objects.room.get(0).addDescription("Desc Line 4");
-		Game_Objects.room.get(0).addLinkingExits("South links to room 2");
-		Game_Objects.room.get(0).addLinkingExits("North links to room 3");*/
+		
+		/*
+		System.out.println("Debugging 1");
+		System.out.println(Game_Objects.room.isEmpty());
+		System.out.println(Game_Objects.room.size());
+		//System.out.println(Game_Objects.room.get(0));
+		//System.out.println(Game_Objects.room.get(0).getName());		
+		// I have already an room in index 0, without a name
+		 * 
+		 */
+		
 		
 		// array list with the rooms info
 		List<String> roomInfo = new ArrayList<>();		
@@ -40,102 +43,138 @@ public class Game_Logic {
 		// parsing the roomInfo by semicolons and spaces
 		// loop through roomInfo
 		for(int i = 0; i < roomInfo.size(); i++) {
-			// it will give me all the lines
-			String[] firstWord = roomInfo.get(i).split(" ");
-			String[] everythingElse = roomInfo.get(i).split(":");
 			
-			if(firstWord[0].equals("Name:")) {
-				int currentRoomSize = Game_Objects.room.size();
+			/*
+			System.out.println("Debugging 2");
+			// total of lines in the text file
+			System.out.println(roomInfo.size()); // 38 lines
+			*/			
+			
+			// it will give me all the lines
+			String[] wordsSeparatedFromSpace = roomInfo.get(i).split(" ");					
+			
+			/*
+			System.out.println("Debugging 3");
+			System.out.println(wordsSeparatedFromSpace.length);
+			for(String word : wordsSeparatedFromSpace) {System.out.println(word);} // 'Name:', 'First', 'Room' - etc, for each line
+			*/
+			
+			String[] wordsSeparatedFromComma = roomInfo.get(i).split(":");
+			// 'First Room', '1', 'Desc Line 1', etc, for each line	
+			
+			/*
+			System.out.println("Debugging 4");
+			System.out.println(wordsSeparatedFromComma.length); // 2 -  The 'Name:' has been separated from 'First Room'
+			//for(String notNameLines : wordsSeparatedFromComma) {System.out.println(notNameLines);} 
+			 */
+			
+			// after here the wordsSeparatedFromComma will have just 1 word "First room"
+			if(wordsSeparatedFromSpace[0].equals("Name:")) {
+				// how many words 'Name' I will find in the text file, save it 
+				int currentRoomSize = Game_Objects.room.size();			
 				
-				Game_Objects.room.add(new Room(currentRoomSize));
-				// because if we have 1 room, it will have the index 0, for example
+				/*
+				// I have 5 rooms, 5 words 'Name:'
+				System.out.println("Debugging 5");
+				System.out.println(currentRoomSize); // it found 5 name in the text file				
+				System.out.println(wordsSeparatedFromComma.length); // length = 2
+				System.out.println(wordsSeparatedFromComma[0]); //Name
+				System.out.println(wordsSeparatedFromComma[1]); //First Room				
+				System.out.println(Game_Objects.room.isEmpty());
+				// I need to consider a empty room has been saved before				
+				System.out.println(Game_Objects.room.get(0).getName()); // rooms without names for now				
+				System.out.println("Debugging 7");
+				System.out.println(Game_Objects.room.size()); // I have 5 rooms in the text file, 		
+				*/			
+				
+				// saving the textfile rooms as instances of the room class
+				Game_Objects.room.add(new Room(currentRoomSize)); // add all the rooms in the file
+				
+				// then setting all of then to a lower index 				
+				//Game_Objects.room.set(currentRoomSize-1, new Room(currentRoomSize));
+				
+				/*
+				System.out.println("Debugging 8");
+				// so now, I have (room(0) empty) + (room(1) to room(5) from textfile)
+				System.out.println(Game_Objects.room.size()); // 6 rooms, 				
+				// try to save the first room of the text file to be that room(0)				
+				for(Room room: Game_Objects.room) {System.out.println(room);}				
+				//System.out.println(Game_Objects.room.set(currentRoomSize-1, new Room(currentRoomSize)));							
+				 */
+				
 				// set the name and number of it
-				Game_Objects.room.get(Game_Objects.room.size() - 1).setName(everythingElse[1]);
+				Game_Objects.room.get(Game_Objects.room.size() - 1).setName(wordsSeparatedFromComma[1]);
 				Game_Objects.room.get(Game_Objects.room.size() - 1).setNumber(currentRoomSize);				
 				
+				/*
+				System.out.println("Debugging 9");
 				System.out.println("-----------");
-				System.out.println(Game_Objects.room.get(Game_Objects.room.size() - 1).getName());				
+				System.out.println("Room Name: " + Game_Objects.room.get(Game_Objects.room.size() - 1).getName());		
+				System.out.println("Room Number: " +Game_Objects.room.get(Game_Objects.room.size() - 1).getNumber());	
+				*/
 				
-				// it will needs to know everytime that it see the word "Name:"
+				// it will needs to know every time that it see the word "Name:"
 				int roomCount = 0;
+								
 				for(int y = 0; y< roomInfo.size(); y++) {
 					String[] nextFirstWord = roomInfo.get(y).split(" ");
+					
+					
+					/*
+					System.out.println("Debugging 10");
+					System.out.println(nextFirstWord.length); // 3
+					for(String word : nextFirstWord) {System.out.println(word);} // "Name:", "First", "Room"
+					*/
 					
 					if(nextFirstWord[0].equals("Name:")) {
 						roomCount++;
 					}
 					
+					// when the counting of rooms reach the last room in the text list:
 					if(roomCount == currentRoomSize) {
 						if(nextFirstWord[0].equals("Desc:")) {
 							String[] nextEverythingElse = roomInfo.get(y).split(":");
 							
+							/*
+							System.out.println("Still Debugging... ");
+							System.out.println(roomCount);
+							System.out.println(roomInfo.get(y));							
+							System.out.println("Debugging 11");							
+							System.out.println(nextEverythingElse.length); // 2 
+							for(String word : nextEverythingElse) {System.out.println(word);} // "Desc", "Desc Line 4"
+							*/
+							
 							// add all the descriptions in the descriptions array
-							Game_Objects.room.get(Game_Objects.room.size() - 1).getDesc().addAll(Arrays.asList(nextEverythingElse));							
+							if(nextEverythingElse.length > 1){
+								Game_Objects.room.get(Game_Objects.room.size() - 1).getDesc().addAll(Arrays.asList(nextEverythingElse[1]));
+							}
 						}
-					}
-				}
-					
-					// adding the Exits saved in the text file
-					/*if(roomCount == currentRoomSize) {
+															
 						if(nextFirstWord[0].equals("Exit:")) {
-							String[] nextEverythingElse = roomInfo.get(z).split(":");*/
 							
-							// Converting [Exit:, South, links, to, room, 1] into 
-							// Exit: South links to room 1							
-							/*StringBuilder sb = new StringBuilder();
-							for(String str: nextEverythingElse) {
-								sb.append(str);
-								// add space between elements
-								sb.append(" ");
+							String[] nextEverythingElse = roomInfo.get(y).split(":");
+							
+							/*
+							System.out.println("First round ");
+							System.out.println(roomCount);
+							System.out.println(roomInfo.get(y));
+							System.out.println("Debugging 12");							
+							System.out.println(nextEverythingElse.length); // 2
+							for(String word : nextEverythingElse) {System.out.println(word);} //  "Exit", "West links to room 2"
+							*/							
+							
+							// add all the exit descriptions in the descriptions array
+							//Game_Objects.room.get(Game_Objects.room.size()- 1).addLinkingExits(nextEverythingElse[1]);
+							if (nextEverythingElse.length> 1 && nextEverythingElse[1] != null) {
+								Game_Objects.room.get(Game_Objects.room.size() - 1).getExits().addAll(Arrays.asList(nextEverythingElse[1]));
+								//Game_Objects.room.get(Game_Objects.room.size()- 1).addLinkingExits(nextEverythingElse[1]);
 							}
-							String exitString = sb.toString();*/
-							
-							//System.out.println("My string is: " + exitString);
-							
-							//String separator = ", ";
-							//String toPrint =
-							
-							// add all the desc of that exit
-							//Game_Objects.room.get(Game_Objects.room.size() - 1).getExits().addAll(Arrays.asList(nextEverythingElse);
-							//Game_Objects.room.get(Game_Objects.room.size() - 1).getExits().addAll(Arrays.asList(exitString));
-							//Game_Objects.room.get(Game_Objects.room.size() - 1).addLinkingExits(exitString);
-						//}
-					//}
-					
-				// put the exits infos here to see if works, after checking the nextFirstWord
-				roomCount = 0;
-				for(int z =0; z< roomInfo.size(); z++) {
-					String[] nextFirstWord = roomInfo.get(z).split(" ");
-					if(nextFirstWord[0].equals("Name:")) {
-						roomCount++;
+							//if(nextEverythingElse.length > 1){
+								//Game_Objects.room.get(Game_Objects.room.size() - 1).getExits().addAll(Arrays.asList(nextEverythingElse[1]));
+							//}														
+						}						
 					}
-					if (roomCount == currentRoomSize) {
-						if(nextFirstWord[0].equals("Exit:")) {
-							String[] nextEverythingElse = roomInfo.get(z).split(":");
-							
-							System.out.println("My list is: " + Arrays.asList(nextEverythingElse));
-							
-							String test;
-							if(nextEverythingElse.length > 1) {
-								test = nextEverythingElse[1];
-							}
-							else {
-								test = nextEverythingElse[0];
-							}
-							
-							// I will try it tomorrow!
-							// tks everyone that has been here!!
-							
-							
-							System.out.println("My string is: " + test);
-							
-							//Game_Objects.room.get(Game_Objects.room.size() - 1).addLinkingExits(test);
-							
-							Game_Objects.room.get(Game_Objects.room.size() - 1).getExits().add(test);
-							//Game_Objects.room.get(Game_Objects.room.size() - 1).getExits().addAll(Arrays.asList(nextEverythingElse));
-						}
-					}
-				}				
+				}		
 			}
 		}		
 	}
@@ -228,22 +267,34 @@ public class Game_Logic {
 			for(int i=0; i < Game_Objects.room.size(); i++) {
 				// if the room is the same as the player is in:
 				if(Game_Objects.room.get(i).getNumber() == Game_Objects.player.getRoom()) {
+					
+					System.out.println(" ");
+					System.out.println("You are at: ");
 					System.out.println(Game_Objects.room.get(i).getName());
-					// loop through all the desc in the room
+					System.out.println(" ");
+					
+					// loop through all the Desc in the room
 					for(int y=0; y<Game_Objects.room.get(i).getArrayDescSize(); y++) {
 						System.out.println(Game_Objects.room.get(i).getDesc().get(y));
 					}
-					System.out.println("Exits:");
+					
+					System.out.println(" ");
+					System.out.println("Exits:");					
 					for(int y=0; y<Game_Objects.room.get(i).getArrayExitsSize(); y++) {
 						// print just the words, we will get the size of the exits
 						// create an array out of that 
 						// example: ("South links to room 2")
 						// print the first word: South
 						String exitFullName = Game_Objects.room.get(i).getExitsbyIndex(y);
+						//System.out.println(exitFullName); // example: South links to room 2
 						String[] exitName = exitFullName.split(" ");
-						System.out.println(exitName[0]);
+						
+						if(exitName[1] != null) {
+							System.out.println(exitName[1]); // 'South', for example
+						}
+						
 					}
-					
+					System.out.println(" ");					
 					// now we are gonna loop through the NPC list in that room					
 					for (int y = 0; y< Game_Objects.room.get(i).getNpcs().size(); y ++) {
 						// any NPC that is in that list we are gonna print the description
@@ -428,7 +479,7 @@ public class Game_Logic {
 		// if the user typed 'move south' for example
 		if(x.length == 2) {
 			// looping through all the rooms in the game
-			for(int i=0; i<Game_Objects.room.size(); i++) {
+			for(int i=0; i < Game_Objects.room.size(); i++) {
 				// if the room is the same as the player is in
 				if(Game_Objects.room.get(i).getNumber() == Game_Objects.player.getRoom()) {
 					
@@ -440,12 +491,13 @@ public class Game_Logic {
 						// now I need to get the first word 'South' and save it in a variable
 						
 						String exitWholeString = Game_Objects.room.get(i).getExits().get(y);
-						String[] exitArray = exitWholeString.split(" ");
+						String[] exitNameArray = exitWholeString.split(" ");
 						
-						// exitArray[0] == South
+						// exitNameArray[1] == 'South' for example, then 'North in the next loop'
+						//System.out.println(exitNameArray[1]);
 												
 						// if the exit the user typed exists in that room
-						if(x[1].equalsIgnoreCase(exitArray[0])) {
+						if(x[1].equalsIgnoreCase(exitNameArray[1])) {
 							//System.out.println("You leave " + Game_Objects.player.getRoom());
 							// print player's room
 							System.out.println("You just leave the room number: "+Game_Objects.player.getRoom());
@@ -453,8 +505,10 @@ public class Game_Logic {
 							// I need to move the player for the room 2 when he calls for south
 							// exitArray[-1] == 2 (number of the room present in the South exit)	
 							// South links to room 2 - I need the number 2
-							String lastWordOfExit =  exitArray[exitArray.length - 1];							
+							String lastWordOfExit =  exitNameArray[exitNameArray.length - 1];							
 							int exitInInt = Integer.parseInt(lastWordOfExit);
+							
+							//System.out.println(exitInInt);
 							
 							// set new player's room number
 							Game_Objects.player.setRoom(exitInInt);
