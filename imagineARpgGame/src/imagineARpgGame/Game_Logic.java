@@ -428,7 +428,7 @@ public class Game_Logic {
 		// pass what the user types in to the player's name
 		Game_Objects.player.setName(sc.next());
 		System.out.println("Hello "+ Game_Objects.player.getName() + ", you have 100hp and 75 accuracy to start");
-		Game_Objects.player.setHp(100);
+		Game_Objects.player.setHp(10);
 		Game_Objects.player.setAccuracy(75);
 		// As the Player is created, it will have the room number of 1
 		Game_Objects.player.setRoom(1);		
