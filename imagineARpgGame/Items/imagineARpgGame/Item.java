@@ -17,5 +17,9 @@ public class Item {
 		return this.name;
 	}
 	
+	public String getWearloc() {
+		return this.wearloc;
+	}
+	
 
 }

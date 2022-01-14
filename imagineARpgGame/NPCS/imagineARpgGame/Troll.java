@@ -6,7 +6,8 @@ public class Troll extends NPC{
 		this.id = "Troll";
 		this.desc = "A Troll stands here";
 		this.hp = 50;
-		this.accuracy = 20;		
+		this.accuracy = 20;	
+		this.baseDamage = 1;
 	}
 	
 	public String getId() {

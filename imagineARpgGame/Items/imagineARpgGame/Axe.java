@@ -1,15 +1,12 @@
 package imagineARpgGame;
 
-public class Axe extends Item{
-	private int accuracy = 10;
-	private int damage = 30;
-	
+public class Axe extends Weapon {	
 	public Axe() {
 		this.name = "A Axe";
 		this.id = "Axe";
 		this.desc = "A Axe lies here";
 		this.isWearable = true;
-		this.wearloc = "wield";
+		this.wearloc = "weapon";
 	}
 	
 	public String getId() {
@@ -19,5 +16,15 @@ public class Axe extends Item{
 	public String getName() {
 		return this.name;
 	}
+	
+	public int getDamage() {
+		return this.damage;
+	}
+	
+	public int getAccuracy() {
+		return this.accuracy;
+	}
+	
+	
 
 }

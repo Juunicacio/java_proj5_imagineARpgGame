@@ -7,6 +7,7 @@ public class NPC {
 	protected String desc;
 	protected int hp;
 	protected int accuracy;
+	protected int baseDamage;
 	
 	public String getId() {
 		return this.id;
@@ -18,6 +19,10 @@ public class NPC {
 	
 	public int getHp() {
 		return this.hp;
+	}
+	
+	public int getBaseDamage() {
+		return this.baseDamage;
 	}
 	
 	public void setHp(int hp) {

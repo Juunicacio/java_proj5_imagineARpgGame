@@ -4,11 +4,32 @@ import java.util.ArrayList;
 
 public class PlayerCharacter {
 	// you can add what you want in here
-	private String name;
-	private int hp;
-	private int accuracy;
-	// if room == 0, this player don't exist in the game
-	private int inRoom = 0;
+		private String name;
+		private int hp;
+		private int accuracy;
+		// if room == 0, this player don't exist in the game
+		private int inRoom;
+		private int baseDamage;  	
+		private int experience;
+		private int expPerLvl;
+	
+	public PlayerCharacter(int h, int acc){
+		inRoom = 0;
+		hp = h;
+		accuracy = acc;
+		baseDamage = 2;  	
+		experience = 0;
+		expPerLvl = 1000;
+	}	
+	//default constructor	
+	public PlayerCharacter(){
+		inRoom = 0;
+		hp = 10;
+		accuracy = 75;
+		baseDamage = 2;  	
+		experience = 0;
+		expPerLvl = 1000;
+	}
 	
 	// list of player items
 	private ArrayList<Item> items = new ArrayList<Item>();
@@ -32,6 +53,10 @@ public class PlayerCharacter {
 		return this.hp;		
 	}	
 	
+	public int getBaseDamage() {
+		return this.baseDamage;		
+	}	
+	
 	public void setAccuracy(int accuracy) {
 		this.accuracy = accuracy;		
 	}
@@ -49,8 +74,24 @@ public class PlayerCharacter {
 		return inRoom;		
 	}
 	
+	public int getPlayerLvl() {
+		return this.experience / this.expPerLvl;
+	}
+	
+	public void addExperience(int exp) {
+		this.experience = this.experience + exp;		
+	}
+	
+	public int getExperience() {
+		return this.experience;
+	}
+	
 	public ArrayList<Item> getItems() {
 		return this.items;
+	}
+	
+	public ArrayList<Item> getCarriedItems() {
+		return this.carriedItems;
 	}
 	
 	public void look() {

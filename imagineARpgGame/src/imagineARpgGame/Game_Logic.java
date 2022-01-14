@@ -14,6 +14,7 @@ import java.util.Scanner;
 
 
 public class Game_Logic {
+	public boolean endGame;
 	public Game_Logic() {
 		// adding a empty room
 		Game_Objects.room.add(new Room(0));		
@@ -96,7 +97,7 @@ public class Game_Logic {
 	// print out the question and wait
 	public void waitForCommand() {
 		if(Game_Objects.player.getRoom() == 0) {
-			createCharacter();
+			startGame();
 		}
 		System.out.println("What you wanna do now?");
 		Scanner sc = new Scanner(System.in);
@@ -145,6 +146,28 @@ public class Game_Logic {
 		
 		if(x[0].equals("attack")) {
 			Game_Objects.combat.attack(x);
+			
+			if(Game_Objects.player.getHp()<=0) {
+				System.out.println("You lost");				
+				System.out.println("Do you wanna play again?");			
+				Scanner sc = new Scanner(System.in);
+				// scanner whatever the user types
+				String com = sc.nextLine();
+				// parse the command by spaces
+				// read each word the user types into an array valueString s = *This is a sample
+				// sentence. *;
+				String[] answer = com.split(" ");
+				
+				if(answer[0].equals("yes")) {
+					// reset game
+					endGame=true;
+					//Game_Objects.initObjects();
+					//Game_Objects.player.setRoom(0);
+				}else {
+					System.exit(0);
+				}
+				
+			};
 		}
 		
 		if(x[0].equals("move")) {
@@ -420,7 +443,7 @@ public class Game_Logic {
 		}		
 	}
 	
-	public void createCharacter() {
+	public void startGame() {
 		System.out.println("Welcome to the Game. What is your name?");
 		// creating a new scanner
 		// later change it to the top at the class since I will create it all the time
@@ -428,8 +451,6 @@ public class Game_Logic {
 		// pass what the user types in to the player's name
 		Game_Objects.player.setName(sc.next());
 		System.out.println("Hello "+ Game_Objects.player.getName() + ", you have 100hp and 75 accuracy to start");
-		Game_Objects.player.setHp(10);
-		Game_Objects.player.setAccuracy(75);
 		// As the Player is created, it will have the room number of 1
 		Game_Objects.player.setRoom(1);		
 	}
