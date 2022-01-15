@@ -19,8 +19,8 @@ public class MonsterThread {
 					while(true) {
 						//System.out.println("Something is happening");
 						populateGameWithMonsters();
-						// waiting 1 sec and populate again
-						Thread.sleep(1000);
+						// waiting 2 min and populate again
+						Thread.sleep(120000);
 						
 						//System.out.println("Something is happening again");
 					}

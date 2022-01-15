@@ -7,6 +7,7 @@ public class Dragon extends NPC {
 		this.desc = "A Dragon stands here";
 		this.hp = 100;
 		this.accuracy = 50;	
+		this.baseDamage = 3;
 	}
 	
 	public String getId() {

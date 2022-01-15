@@ -14,6 +14,7 @@ Desc: Desc Line 3
 Desc: Desc Line 4
 Exit: West links to room 4
 Exit: East links to room 5
+Exit: North links to room 1
 Name: North Room
 Number: 3
 Desc: Desc Line 1
