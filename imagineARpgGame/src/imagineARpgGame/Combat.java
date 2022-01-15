@@ -6,8 +6,7 @@ public class Combat {
 		// if the user typed just attack
 		if(x.length == 1) {
 			System.out.println("Attack what exactly?");
-		}
-		
+		}		
 		// check what that second word is
 		if(x.length == 2) {
 			for(int i = 0; i < Game_Objects.room.size(); i++) {				

@@ -5,7 +5,7 @@ import java.util.List;
 
 // it will contains all the npcs and items, for example, in the game
 
-public class Game_Objects {
+public class Game_Objects {	
 	
 	static PlayerCharacter player;	
 	// first we are gonna add an arraylist

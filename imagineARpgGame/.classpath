@@ -8,5 +8,7 @@
 	<classpathentry kind="src" path="src"/>
 	<classpathentry kind="src" path="NPCS"/>
 	<classpathentry kind="src" path="Items"/>
+	<classpathentry kind="src" path="Lauching Pages"/>
+	<classpathentry kind="src" path="Imgs"/>
 	<classpathentry kind="output" path="bin"/>
 </classpath>

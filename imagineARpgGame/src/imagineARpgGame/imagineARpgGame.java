@@ -1,15 +1,23 @@
 package imagineARpgGame;
 
+import java.io.IOException;
+
 public class imagineARpgGame {
 	
 	// making the program create a character:
 	// creating an instance of our game_logic class
 	static Game_Logic gl;
 
-	public static void main(String[] args) {
+	public static void main(String[] args){
 		// TODO Auto-generated method stub
-		while(true) {
-			
+		
+		// creates first gui
+		//MyGUI gui = new MyGUI();
+		
+		//launching pages
+		LaunchPage launchPage = new LaunchPage();
+
+		while(true) {				
 			Game_Objects.initObjects();
 			gl = new Game_Logic();
 			gl.endGame=false;

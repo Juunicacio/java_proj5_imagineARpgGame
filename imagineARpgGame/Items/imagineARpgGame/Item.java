@@ -6,8 +6,7 @@ public class Item {
 	// desc for Item the player will see
 	protected String desc;
 	protected boolean isWearable;
-	protected String wearloc;
-	
+	protected String wearloc;	
 	
 	public String getId() {
 		return this.id;

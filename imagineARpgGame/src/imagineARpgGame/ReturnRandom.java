@@ -8,5 +8,4 @@ public class ReturnRandom {
 		int result = rd.nextInt(x);
 		return result;
 	}
-
 }
